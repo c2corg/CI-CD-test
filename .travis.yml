@@ -21,6 +21,7 @@ deploy:
   #   all_branches: true
   # custom script
   provider: script
+  skip-cleanup: true
   script: scripts/github-deploy.sh
   verbose: true
   on:
