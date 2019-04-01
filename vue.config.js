@@ -1,6 +1,5 @@
 
 const webpack = require('webpack');
-const { execSync } = require('child_process');
 const path = require("path");
 
 const result = {
@@ -15,7 +14,6 @@ const config = {
 };
 
 if (process.env.BUILD_ENV === 'github') {
-  console.log(process.env.TRAVIS_BRANCH);
   config.branchName = process.env.TRAVIS_BRANCH;
   // github pages urls are postfixed
   result.publicPath = `/CI-CD-test/${config.branchName}/`;
