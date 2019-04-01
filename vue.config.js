@@ -15,8 +15,8 @@ const config = {
 };
 
 if (process.env.BUILD_ENV === 'github') {
-  console.log(execSync('git branch | grep \\* | cut -d \' \' -f2').toString());
-  config.branchName = execSync('git branch | grep \\* | cut -d \' \' -f2').toString();
+  console.log(process.env.TRAVIS_BRANCH);
+  config.branchName = process.env.TRAVIS_BRANCH;
   // github pages urls are postfixed
   result.publicPath = `/c2c_ui/${config.branchName}/`;
   result.outputDir = path.resolve(__dirname, `./dist/${config.branchName}`);
