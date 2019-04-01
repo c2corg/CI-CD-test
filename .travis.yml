@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- 10
+
+install:
+- npm install
+
+before_deploy:
+- npm run build:github
+
+# deploy to github pages on master
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: dist
+  github-token: $GITHUB_TOKEN
+  keep-history: true
