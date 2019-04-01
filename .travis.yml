@@ -12,6 +12,9 @@ before_deploy:
 deploy:
   provider: pages
   skip-cleanup: true
-  local-dir: dist
+  local-dir: dist/$TRAVIS_BRANCH
   github-token: $GITHUB_TOKEN
   keep-history: true
+  verbose: true
+  on:
+    all_branches: true
