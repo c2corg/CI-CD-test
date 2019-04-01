@@ -6,6 +6,7 @@ install:
 - npm install
 
 before_deploy:
+- git branch
 - npm run build:github
 
 # deploy to github pages on master
