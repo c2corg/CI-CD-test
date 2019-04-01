@@ -5,7 +5,7 @@ This repo is a test repo
 
 Proof of concept of a CI-CD env integrated with github pages and camptocamp prod/demo servers
 
-* [ ] When a commit is made on <branch-name> branch, a build must be run and deployed on https://c2corg.github.io/ci-cd-test/<branch-name>/#/
+* [ ] When a commit is made on <branch-name> branch, a build must be run and deployed on `https://c2corg.github.io/ci-cd-test/<branch-name>/#/`
   * [ ] if <branch-name> is `gh-pages`, do nothing
   * [ ] if <branch-name> is `master`, build must also be available on https://c2corg.github.io/ci-cd-test/#/
 * [ ] When a commit is made on `master`, a build must be run and deployed on demo server
