@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    {{ config }}
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -31,12 +32,20 @@
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  // eslint-disable-next-line no-undef
+  const config = CAMPTOCAMP_CONFIG;
+
+  export default {
+    name: 'HelloWorld',
+    props: {
+      msg: String
+    },
+    data() {
+      return {
+        config
+      }
+    }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
