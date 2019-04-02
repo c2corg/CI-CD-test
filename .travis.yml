@@ -7,22 +7,9 @@ install:
 
 before_deploy:
 - npm run build:github
-- echo "TRAVIS_PULL_REQUEST $TRAVIS_PULL_REQUEST"
-- echo $TRAVIS_PULL_REQUEST
-- echo $TRAVIS_BRANCH
 
 # deploy to github pages on master
 deploy:
-  ## old way
-  # provider: pages
-  # skip-cleanup: true
-  # local-dir: dist
-  # github-token: $GITHUB_TOKEN
-  # keep-history: true
-  # verbose: true
-  # on:
-  #   all_branches: true
-  # custom script
   provider: script
   skip-cleanup: true
   script: bash scripts/deploy.sh
