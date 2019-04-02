@@ -1,6 +1,5 @@
 
 const webpack = require('webpack');
-const path = require("path");
 
 const result = {
   publicPath: '/',
@@ -17,7 +16,6 @@ if (process.env.BUILD_ENV === 'github') {
   config.branchName = process.env.TRAVIS_BRANCH;
   // github pages urls are postfixed
   result.publicPath = `/CI-CD-test/${config.branchName}/`;
-  result.outputDir = path.resolve(__dirname, `./dist/${config.branchName}`);
 } else if (process.env.BUILD_ENV === 'production') {
   config.isProduction = true;
 }

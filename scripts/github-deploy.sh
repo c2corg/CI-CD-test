@@ -1,16 +1,15 @@
 # clone 
-git clone --depth=50 --branch=gh-pages https://github.com/c2corg/CI-CD-test.git c2corg/CI-CD-test
+git clone --single-branch --branch=gh-pages https://github.com/c2corg/CI-CD-test.git gh-pages
 
 # move new folder
-mv dist/$TRAVIS_BRANCH c2corg/CI-CD-test/$TRAVIS_BRANCH
+mv dist gh-pages/$TRAVIS_BRANCH
 
-cd c2corg/CI-CD-test
+cd gh-pages
 ls -la
 
 git branch
 
 git add -A
-
-git commit -m="Deploy $TRAVIS_BRANCH branch"
+git commit -m "Deploy $TRAVIS_BRANCH branch"
 
 git push
