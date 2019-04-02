@@ -54,17 +54,12 @@ mv dist gh-pages/$TRAVIS_BRANCH
 cd gh-pages
 git add .
 git commit -m "Deploy $TRAVIS_BRANCH branch"
-git push
+git push > /dev/null 2>&1
 ```
+
+Notice the > /dev/null 2>&1 on the end! If push fails for any reason,
+it prevents any unwanted sensitive information to be recorded in the travis logs. 
 
 ### Other build musts be preserved
 
 The key point is that we clone full gh-pages branch, and add our build into it. Standard travis script does not preserve precendents files, so we must use a custom script
-
-
-
-
-
-
-
-
