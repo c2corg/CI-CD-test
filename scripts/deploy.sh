@@ -1,6 +1,8 @@
+echo "Deploy $TRAVIS_REPO_SLUG:$TRAVIS_BRANCH build on gh-pages branch"
+echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
+
 # clone repository on gh-pages branch. Save it in gh-pages folder 
-git clone --single-branch --branch=gh-pages https://${GITHUB_TOKEN}@github.com/c2corg/CI-CD-test.git gh-pages
-# git clone --single-branch --branch=gh-pages https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+git clone --single-branch --branch=gh-pages https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
 
 # move build into gh-pages folder, under a new folder with <branch-name> as name
 mv dist gh-pages/$TRAVIS_BRANCH
