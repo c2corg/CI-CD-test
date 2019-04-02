@@ -21,10 +21,10 @@
           </div>
         </div>
         <h1 class="title">
-          Camptocamp.org UI - Branch list
+          Camptocamp.org UI - Build list
         </h1>
         <p class="subtitle">
-          Pleas
+          Here is the list of active builds
         </p>
         <div class="notification info" v-if="!branches">Loading</div>
         <ul v-else>
@@ -41,6 +41,23 @@
             <a :href="branch.githubPageUrl" :class="{'has-text-danger': branch.buildIsReady === false}">
               <span>{{ branch.name }}</span>
             </a>
+            <span>
+              ->
+            </span>
+            <em v-if="branch.pull === undefined">Getting pull request</em>
+            <em v-else-if="branch.pull === null" class="has-text-warning">There is not PR for this branch</em>
+            <span v-else>
+              <a :href="branch.pull.html_url">
+                Pull request
+              </a>
+              <span>by</span>
+              <a :href="branch.pull.user.html_url">
+                {{ branch.pull.user.login }} : 
+              </a>
+              <em>
+                {{ branch.pull.title }}
+              </em>
+            </span>
           </li>
         </ul>
       </div>
@@ -61,7 +78,7 @@
         created(){
           axios.get(`https://api.github.com/repos/${REPO_SLUG}/branches`)
             .then((response) => {
-            this.branches = response.data;
+            this.branches = response.data.filter((branch) => branch.name !== 'gh-pages');
             this.branches.map(this.initBranch);
             this.dispatchContents();
             this.dispatchPulls();
@@ -99,8 +116,8 @@
             this.branches.map((branch) => { branches[branch.name] = branch });
 
             for (const pull of this.pulls){
-              if (branches[pull.head.label] !== undefined) {
-                branches[pull.head.label].pull = pull;
+              if (branches[pull.head.ref] !== undefined) {
+                branches[pull.head.ref].pull = pull;
               }
             }
           },
