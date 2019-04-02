@@ -22,7 +22,7 @@ deploy:
   # custom script
   provider: script
   skip-cleanup: true
-  script: scripts/deploy.sh
+  script: bash scripts/deploy.sh
   verbose: true
   on:
     all_branches: true
