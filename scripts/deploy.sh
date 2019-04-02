@@ -8,8 +8,12 @@ git clone --single-branch --branch=gh-pages https://${GITHUB_TOKEN}@github.com/$
 rm -rf gh-pages/$TRAVIS_BRANCH
 mv dist gh-pages/$TRAVIS_BRANCH
 
-# Add this folder into gh-pages branch, commit and push
+# Add this folder into gh-pages branch and commit
 cd gh-pages
 git add .
 git commit -m "Deploy $TRAVIS_BRANCH branch"
-git push
+
+# push
+# Notice the > /dev/null 2>&1 on the end! If push fails for any reason,
+# it prevents any unwanted sensitive information to be recorded in the travis logs. 
+git push > /dev/null 2>&1
