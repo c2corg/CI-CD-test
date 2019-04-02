@@ -4,6 +4,7 @@ node_js:
 
 install:
 - npm install
+- echo "fail"
 
 before_deploy:
 - npm run build:github
