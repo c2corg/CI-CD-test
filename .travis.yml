@@ -10,11 +10,19 @@ before_deploy:
 
 # deploy to github pages on master
 deploy:
-  provider: pages
+  ## old way
+  # provider: pages
+  # skip-cleanup: true
+  # local-dir: dist
+  # github-token: $GITHUB_TOKEN
+  # keep-history: true
+  # verbose: true
+  # on:
+  #   all_branches: true
+  # custom script
+  provider: script
   skip-cleanup: true
-  local-dir: dist
-  github-token: $GITHUB_TOKEN
-  keep-history: true
+  script: scripts/deploy.sh
   verbose: true
   on:
     all_branches: true
