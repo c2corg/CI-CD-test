@@ -5,16 +5,31 @@ This repo is a test repo
 
 Proof of concept of a CI-CD env integrated with github pages and camptocamp prod/demo servers
 
-1. [x] When a commit is made on <branch-name> branch, a build must be run and deployed on `https://c2corg.github.io/ci-cd-test/<branch-name>/#/`
-  1. [x] Other build musts be preserved
-  2. [x] if <branch-name> is `gh-pages`, do nothing
-  3. [ ] <del>if <branch-name> is `master`, build must also be available on https://c2corg.github.io/ci-cd-test/#/</del> **No**, it may need two builds, as branch name must be in URL. Too heavy, skip. 
-  4. [ ] set a pages with available builds list on root page
-2. [ ] When a commit is made on `master`, a build must be run and deployed on demo server
-3. [ ] When a [release](https://github.com/c2corg/CI-CD-test/releases) is done on github
-  * [ ] a build must be run and deployed on production server 
-  * [ ] a git log must be added in release description : `git log --pretty=oneline v7.0.6..HEAD --no-merges`
-  * [ ] a message must be sent on camptocamp forum
+### [x] When a commit is made on <branch-name> branch
+  
+1. a build must be run and deployed on `https://c2corg.github.io/ci-cd-test/<branch-name>/#/`
+2. [x] Other build musts be preserved
+3. [x] if <branch-name> is `gh-pages`, do nothing
+4. [ ] <del>if <branch-name> is `master`, build must also be available on https://c2corg.github.io/ci-cd-test/#/</del> **No**, it may need two builds, as branch name must be in URL. Too heavy, skip. 
+5. [X] set a pages with available builds list on root page
+  
+### [ ] When a commit is made on `master`
+
+1. [ ] a build must be run and deployed on demo server
+2. [ ] `.po` file must be pushed to transifex
+
+### [ ] When a [release](https://github.com/c2corg/CI-CD-test/releases) is done on github
+
+* [ ] a git log must be added in release description : `git log --pretty=oneline v7.0.6..HEAD --no-merges`
+* [x] a docker image must be pushed to docker hub
+* [ ] production server must be updated with this image
+* [ ] a message must be sent on camptocamp forum
+
+### [ ] When a string is translated to transifex
+
+* `messages:compile`must be run
+* For each lang with new messages, a PR must be created : `translations-<lang>`
+* It must be done once a day, at midnight
 
 ----
 
