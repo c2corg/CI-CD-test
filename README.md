@@ -8,8 +8,8 @@ Proof of concept of a CI-CD env integrated with github pages and camptocamp prod
 1. [x] When a commit is made on <branch-name> branch, a build must be run and deployed on `https://c2corg.github.io/ci-cd-test/<branch-name>/#/`
   1. [x] Other build musts be preserved
   2. [x] if <branch-name> is `gh-pages`, do nothing
-  3. <del>if <branch-name> is `master`, build must also be available on https://c2corg.github.io/ci-cd-test/#/</del> **No**, it may need two builds, as branch name must be in URL. Too heavy, skip. 
-      We can set a pages with available builds list on root page
+  3. [ ] <del>if <branch-name> is `master`, build must also be available on https://c2corg.github.io/ci-cd-test/#/</del> **No**, it may need two builds, as branch name must be in URL. Too heavy, skip. 
+  4. [ ] set a pages with available builds list on root page
 2. [ ] When a commit is made on `master`, a build must be run and deployed on demo server
 3. [ ] When a [release](https://github.com/c2corg/CI-CD-test/releases) is done on github
   * [ ] a build must be run and deployed on production server 
@@ -69,6 +69,10 @@ it prevents any unwanted sensitive information to be recorded in the travis logs
 #### Other build musts be preserved
 
 The key point is that we clone full gh-pages branch, and add our build into it. Standard travis script does not preserve precendents files, so we must use a custom script
+
+#### Set a page with available builds list on root page
+
+See index.html
 
 ### When a commit is made on master
 
