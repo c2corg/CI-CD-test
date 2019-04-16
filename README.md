@@ -5,9 +5,9 @@ This repo is a test repo
 
 Proof of concept of a CI-CD env integrated with github pages and camptocamp prod/demo servers
 
-### [x] When a commit is made on <branch-name> branch
+### [x] When a commit is made on {branch-name} branch
   
-1. a build must be run and deployed on `https://c2corg.github.io/ci-cd-test/<branch-name>/#/`
+1. a build must be run and deployed on `https://c2corg.github.io/ci-cd-test/{branch-name}/#/`
 2. [x] Other build musts be preserved
 3. [x] if <branch-name> is `gh-pages`, do nothing
 4. [ ] <del>if <branch-name> is `master`, build must also be available on https://c2corg.github.io/ci-cd-test/#/</del> **No**, it may need two builds, as branch name must be in URL. Too heavy, skip. 
@@ -27,15 +27,15 @@ Proof of concept of a CI-CD env integrated with github pages and camptocamp prod
 
 ### [ ] When a string is translated to transifex
 
-* `messages:compile`must be run
-* For each lang with new messages, a PR must be created : `translations-<lang>`
+* `messages:compile` must be run
+* For each lang with new messages, a PR must be created : `translations-{lang}`
 * It must be done once a day, at midnight
 
 ----
 
 ## Solutions
 
-### 1. When a commit is made on  Deploy on <branch-name> 
+### 1. When a commit is made on {branch-name} : 
   
 #### Deploy on `https://c2corg.github.io/ci-cd-test/<branch-name>/#/`
 
