@@ -22,6 +22,7 @@ Proof of concept of a CI-CD env integrated with github pages and camptocamp prod
 
 * [ ] a git log must be added in release description : `git log --pretty=oneline v7.0.6..HEAD --no-merges`
 * [x] a docker image must be pushed to docker hub
+  * it's actually done, but with an overkill : any commit on any branch push an image. We may improve this, at least by limiting it to commits made on master
 * [ ] production server must be updated with this image
 * [ ] a message must be sent on camptocamp forum
 
