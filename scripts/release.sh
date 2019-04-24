@@ -8,7 +8,7 @@ if [ $TRAVIS_TAG ]; then
     
     echo "Changes between ${secondTag} and ${firstTag}\n"
     
-    git log  --pretty=format:' * %s' ${secondTag}..${firstTag}
+    git log  --pretty=oneline ${secondTag}..${firstTag} --no-merges
 fi
 
 
