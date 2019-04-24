@@ -96,4 +96,8 @@ Todo..
 
 ### When a [release](https://github.com/c2corg/CI-CD-test/releases) is done on github
 
-Todo ...
+* a git log must be added in release description WIP
+  * https://github.com/c2corg/CI-CD-test/blob/master/scripts/release.sh
+  * https://developer.github.com/v3/repos/releases/#create-a-release
+  * https://api.github.com/repos/c2corg/CI-CD-test/releases/tags/v0.0.2
+  
