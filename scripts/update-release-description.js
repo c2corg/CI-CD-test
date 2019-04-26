@@ -3,23 +3,15 @@
 const fs = require('fs');
 const axios = require('axios');
 
-if (process.argv.length !== 5) {
-  console.log(`Usage
-  node ${process.argv[1]} <tag-name> <user> <token>`);
-  process.exit(1);
-}
-
-const orgName = 'c2corg';
-const repoName = 'CI-CD-test';
-
-const tagName = process.argv[2];
-const githubUsername = process.argv[3];
-const githubToken = process.argv[4];
+const repoSlug = process.env.TRAVIS_REPO_SLUG;
+const tagName = process.env.TRAVIS_TAG;
+const githubUsername = process.env.GITHUB_USERNAME;
+const githubToken = process.env.GITHUB_TOKEN;
 
 const gitLog = fs.readFileSync('/dev/stdin', 'utf-8');
 console.log('getting release data');
 
-axios.get(`https://api.github.com/repos/${orgName}/${repoName}/releases/tags/${tagName}`)
+axios.get(`https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`)
   .then((response) => {
     const data = response.data;
     const releaseUrl = data.url;
@@ -45,6 +37,6 @@ axios.get(`https://api.github.com/repos/${orgName}/${repoName}/releases/tags/${t
         console.log('Release is updated');
       })
       .catch((error) => {
-        console.log(error);
+        console.log('Unexpected error. Ouput has been disabled on purpose for security reasons');
     });
 });
