@@ -9,7 +9,7 @@ const githubUsername = process.env.GITHUB_USERNAME;
 const githubToken = process.env.GITHUB_TOKEN;
 
 const gitLog = fs.readFileSync('/dev/stdin', 'utf-8');
-console.log(`git log : \n${gitlog}`);
+console.log(`git log : \n${gitLog}`);
 
 console.log('getting release data');
 
