@@ -9,6 +9,8 @@ const githubUsername = process.env.GITHUB_USERNAME;
 const githubToken = process.env.GITHUB_TOKEN;
 
 const gitLog = fs.readFileSync('/dev/stdin', 'utf-8');
+console.log(`git log : \n${gitlog}`);
+
 console.log('getting release data');
 
 axios.get(`https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`)
@@ -25,7 +27,7 @@ axios.get(`https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`)
       'prerelease': data.prerelease
     };
 
-    console.log('Update release data', releaseUrl);
+    console.log('Update release data');
 
     axios.patch(releaseUrl, payload, {
       auth: {
