@@ -11,7 +11,7 @@ const githubToken = process.env.GITHUB_TOKEN;
 const gitLog = fs.readFileSync('/dev/stdin', 'utf-8');
 console.log(`git log : \n${gitLog}`);
 
-console.log('getting release data');
+console.log(`getting release data on https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`);
 
 axios.get(`https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`)
   .then((response) => {
@@ -38,7 +38,13 @@ axios.get(`https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`)
       .then(() => {
         console.log('Release is updated');
       })
-      .catch((error) => {
+      .catch(() => {
         console.log('Unexpected error. Ouput has been disabled on purpose for security reasons');
+        process.exit(1);
     });
-});
+  })
+  .catch(() => {
+    console.log('Unexpected error. Ouput has been disabled on purpose for security reasons');
+    process.exit(1);
+  }
+);
