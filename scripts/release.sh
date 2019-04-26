@@ -8,7 +8,5 @@ if [ $TRAVIS_TAG ]; then
     
     echo "Changes between ${secondTag} and ${firstTag}\n"
     
-    git log  --pretty=oneline ${secondTag}..${firstTag} --no-merges
+    git log  --pretty=oneline ${secondTag}..${firstTag} --no-merges | node scripts/update-release-description.js
 fi
-
-
