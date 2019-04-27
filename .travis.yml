@@ -4,7 +4,9 @@ node_js:
 
 install:
 - npm install
-- bash scripts/release.sh
+
+script:
+- bash scripts/update-release-description.sh
 
 before_deploy:
 - npm run build:github
