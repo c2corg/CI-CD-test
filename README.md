@@ -96,8 +96,79 @@ Todo..
 
 ### When a [release](https://github.com/c2corg/CI-CD-test/releases) is done on github
 
-* a git log must be added in release description WIP
-  * https://github.com/c2corg/CI-CD-test/blob/master/scripts/release.sh
-  * https://developer.github.com/v3/repos/releases/#create-a-release
-  * https://api.github.com/repos/c2corg/CI-CD-test/releases/tags/v0.0.2
+#### a git log must be added in release description
+
+**.travis.yml**
+```yml
+script:
+- bash scripts/update-release-description.sh
+```
+
+**scripts/update-release-description.sh**
+
+*Check if tavis job is related to a tag, get last two tags, and call js script*
+
+```bash
+# if it's a tag, add commit logs
+if [ $TRAVIS_TAG ]; then
+    firstTag=$(git tag | sort -r | head -1)
+    secondTag=$(git tag | sort -r | head -2 | awk '{split($0, tags, "\n")} END {print tags[1]}')
+    git log  --pretty=oneline ${secondTag}..${firstTag} --no-merges | node scripts/update-release-description.js
+fi
+```
+
+**scripts/update-release-description.js**
+
+```js
+/* eslint-disable no-console */
+
+const fs = require('fs');
+const axios = require('axios');
+
+const repoSlug = process.env.TRAVIS_REPO_SLUG;
+const tagName = process.env.TRAVIS_TAG;
+const githubUsername = process.env.GITHUB_USERNAME;
+const githubToken = process.env.GITHUB_TOKEN;
+
+const gitLog = fs.readFileSync('/dev/stdin', 'utf-8');
+console.log(`git log : \n${gitLog}`);
+
+console.log(`getting release data on https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`);
+
+axios.get(`https://api.github.com/repos/${repoSlug}/releases/tags/${tagName}`)
+  .then((response) => {
+    const data = response.data;
+    const releaseUrl = data.url;
+
+    const payload = {
+      'tag_name': data.tag_name,
+      'target_commitish': data.target_commitish,
+      'name': data.name,
+      'body': gitLog,
+      'draft': data.draft,
+      'prerelease': data.prerelease
+    };
+
+    console.log('Update release data');
+
+    axios.patch(releaseUrl, payload, {
+      auth: {
+        username: githubUsername,
+        password: githubToken
+      }
+    })
+      .then(() => {
+        console.log('Release is updated');
+      })
+      .catch(() => {
+        console.log('Unexpected error. Ouput has been disabled on purpose for security reasons');
+        process.exit(1);
+    });
+  })
+  .catch(() => {
+    console.log('Unexpected error. Ouput has been disabled on purpose for security reasons');
+    process.exit(1);
+  }
+);
+```
   
