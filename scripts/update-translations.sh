@@ -16,16 +16,7 @@ do
     FILE="translations/dist/$lang.json"
 
     git checkout -q master
-
-    git ls-remote --heads | grep refs/heads/$BRANCH_NAME >/dev/null
-    if [ "$?" == "1" ] ; then
-        echo "Branch $BRANCH_NAME doesn't exist, create it";
-        git checkout -b $BRANCH_NAME
-    else
-        echo "Branch $BRANCH_NAME exist, load it";
-        git checkout -q --track origin/$BRANCH_NAME
-    fi
-
+    git checkout -b $BRANCH_NAME
     curl -s --user api:$TRANSIFEX_TOKEN -X GET $TRANSIFEX_URL | node scripts/po2json.js > $FILE
 
     if [[ `git status --porcelain` ]]; then
